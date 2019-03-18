@@ -44,6 +44,7 @@ let jump = (event) => {
 const cycleLoop = [0, 1, 2, 3, 4, 5]
 let currentLoopIndex = 0
 let frameCount = 0
+steps = 0
 
 let sprite = () => {
 
@@ -59,10 +60,36 @@ let sprite = () => {
 
     trap += velocity_x
     canvasY += velocity
+    velocity *= 0.5 // ถ่วงเวลา
 
-    velocity *= 0.6// ถ่วงเวลา
-    velocity_x *= 0.6
-
+    if(score < 100){
+      velocity_x *= 0.5 //ความเร็วก้อนหิน
+    }
+    if(score >= 100){
+      steps = 1
+      velocity_x *= 0.6
+      step.innerText = "STEP: " + steps
+    }
+    if (score >= 300){
+      steps = 2
+      velocity_x *= 0.8
+      step.innerText = "STEP: " + steps
+    }
+    if (score >= 500){
+      steps = 3
+      velocity_x *= 0.9
+      step.innerText = "STEP: " + steps
+    }
+    if (score >= 750){
+      steps = 4
+      velocity_x *= 1
+      step.innerText = "STEP: " + steps
+    }
+    if (score >= 800){
+      steps = 5
+      velocity_x *= 1.2
+      step.innerText = "STEP: " + steps
+    }
     //เช็คเวลาชนกัน
     if(trap > 100 && trap < 250 && canvasY > 460){
 	  sound('hit')
