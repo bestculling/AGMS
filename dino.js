@@ -122,7 +122,7 @@ window.addEventListener('keyup', jump)
 var score = 0;
 function addScore() {
     score += 1;
-    myScore.innerText = "SCORE: " + pad(score, 3);
+    myScore.innerText = "SCORE: " + pad(score, 4);
 }
 function pad(n, length) {
   var len = length - (''+n).length;
