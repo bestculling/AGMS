@@ -90,8 +90,10 @@ let sprite = () => {
     if (currentLoopIndex >= cycleLoop.length){
         currentLoopIndex = 0
     }
-    let audio = document.getElementById("bgm");
-    audio.volume = 0.0 // ปรับระดับเสียงเกมส์
+    let audio_game = document.getElementById('bgm')
+    let audio_jump = document.getElementById('jump')
+    audio_game.volume = 0.2 // ปรับระดับเสียงเกมส์
+    audio_jump.volume = 0.2 // ปรับเสียงกระโดด
     window.requestAnimationFrame(sprite)
 
 }
