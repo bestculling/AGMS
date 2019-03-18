@@ -108,7 +108,7 @@ let sprite = () => {
     let audio_game = document.getElementById('bgm')
     let audio_jump = document.getElementById('jump')
     audio_game.volume = 0.5 // ปรับระดับเสียงเกมส์
-    audio_jump.volume = 0.2 // ปรับเสียงกระโดด
+    audio_jump.volume = 0.5 // ปรับเสียงกระโดด
     window.requestAnimationFrame(sprite)
 
 }
