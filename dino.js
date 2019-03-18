@@ -64,7 +64,8 @@ let sprite = () => {
     velocity_x *= 0.6
 
     //เช็คเวลาชนกัน
-    if(trap > 100 && trap < 200 && canvasY > 400){
+    if(trap > 100 && trap < 250 && canvasY > 460){
+	  sound('hit')
       score = -1;
 	  let distance = [500, 600, 700, 800, 900, 1000, 1200, 650]
       trap = distance[Math.floor(distance.length * Math.random())]
