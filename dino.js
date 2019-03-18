@@ -1,8 +1,10 @@
 //โหลดรูปภาพ
 let dino = new Image()
 let map = new Image()
+let rock = new Image()
 map.src = 'image/map.jpg'
 dino.src = 'image/dino_idle.png'
+rock.src = 'image/rock.png'
 //เริ่มเกมส์ จะเรียกฟังก์ชัน start()
 map.onload = () => start()
 //เข้าถึง tag canvas
@@ -17,19 +19,24 @@ const scaleHeigth = scale * height
 ground  = 480 //ตำเเหน่งพื้นที่ dino ยืน
 canvasY = 0 
 gravity = 20 //เเรงโน้วถ่วง
+jumping = true
+up = false
+velocity = 0
+let trap = []
+trap[0] = {
+    x : 100,
+    y : 0
+};
+
 
 let drawFram = (framX, framY, canvasX) => {
     ctx.drawImage(map, 0, 0)
     ctx.drawImage(dino, framX * width, framY * height, width, height, canvasX, canvasY, scaleWidth, scaleHeigth)
 
-    if (canvasY < ground){
-        canvasY += gravity
-    }
-    window.addEventListener('click', jump) //เวลาคลิ๊กเเล้ว ฟังก์ชัน jump() จะทำงาน
 }
-let jump = () => {
-    //กระโดดขึ้น 200
-    canvasY -= 200
+let jump = (event) => {
+    let state = (event.type == 'keydown')?true:false
+    up = state
 }
 
 //กำหนดจำนวน dino ใน sprite
@@ -38,6 +45,25 @@ let currentLoopIndex = 0
 let frameCount = 0
 
 let sprite = () => {
+
+    if (up && jumping == false){
+        canvasY -= 250
+        jumping = true
+    }
+
+    velocity += 1.5// gravity
+    canvasY += velocity
+    velocity *= 0.9// friction
+
+  // เช็คว่า dino ตกพื้น
+  if (canvasY > 480) {
+
+    jumping = false;
+    canvasY = 480
+    velocity = 0
+
+  }
+
     frameCount++
     //ความเร็วของ Animation
     if (frameCount < 4){
@@ -54,7 +80,7 @@ let sprite = () => {
         framY คือ 0
         canvasx คือ 0
     */
-    drawFram(cycleLoop[currentLoopIndex], 0, 0)
+    drawFram(cycleLoop[currentLoopIndex], 0, 50)
     currentLoopIndex++
     if (currentLoopIndex >= cycleLoop.length){
         currentLoopIndex = 0
@@ -64,6 +90,9 @@ let sprite = () => {
 
 let start = () => window.requestAnimationFrame(sprite)
 
+//รับค่าจาก keyboard ลูกศรขึ้นม ลง
+window.addEventListener('keydown', jump)
+window.addEventListener('keyup', jump)
 //score
 document.getElementById("subTitle").innerHTML = "SCORE : " + 1
 
