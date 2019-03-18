@@ -28,6 +28,10 @@ trap[0] = {
     y : 0
 };
 
+//ควบคุมเสียงเกมส์
+let sound = (id)=>{
+    document.getElementById(id).play()
+}
 
 let drawFram = (framX, framY, canvasX) => {
     ctx.drawImage(map, 0, 0)
@@ -48,6 +52,7 @@ let sprite = () => {
 
     if (up && jumping == false){
         canvasY -= 250
+        sound('jump')
         jumping = true
     }
 
@@ -85,7 +90,10 @@ let sprite = () => {
     if (currentLoopIndex >= cycleLoop.length){
         currentLoopIndex = 0
     }
+    let audio = document.getElementById("bgm");
+    audio.volume = 0.0 // ปรับระดับเสียงเกมส์
     window.requestAnimationFrame(sprite)
+
 }
 
 let start = () => window.requestAnimationFrame(sprite)
@@ -93,6 +101,5 @@ let start = () => window.requestAnimationFrame(sprite)
 //รับค่าจาก keyboard ลูกศรขึ้นม ลง
 window.addEventListener('keydown', jump)
 window.addEventListener('keyup', jump)
-//score
-document.getElementById("subTitle").innerHTML = "SCORE : " + 1
+
 

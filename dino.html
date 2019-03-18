@@ -13,8 +13,11 @@
         <h3 id="subTitle"></h3>
     </section>
     <canvas width="1200px" height="700px"></canvas> 
-    <audio preload="auto">
-        <source src="./sound/bgm.mp3" type="audio/wav">
+    <audio autoplay id="bgm" preload="auto" loop>
+        <source src="./sound/bgm.mp3" type="audio/ogg">
+    </audio>
+    <audio id="jump" preload="auto">
+        <source src="./sound/jump.wav" type="audio/ogg">
     </audio>
     <script src="dino.js"></script>
 </body>
