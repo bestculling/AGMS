@@ -66,7 +66,7 @@ let sprite = () => {
 
     //เช็คเวลาชนกัน
     if(trap > 100 && trap < 200 && canvasY > 400){
-      location.reload();
+      location.reload(); //โหลดหน้าใหม่
     }
 
     if(trap < 0){
