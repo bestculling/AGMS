@@ -64,10 +64,11 @@ let sprite = () => {
     velocity *= 0.6// ถ่วงเวลา
     velocity_x *= 0.6
 
+    //เช็คเวลาชนกัน
     if(trap > 100 && trap < 200 && canvasY > 400){
       location.reload();
-      alert("You DIE!")
     }
+
     if(trap < 0){
       let distance = [500, 600, 700, 800, 900, 1000, 1200, 650]
       trap = distance[Math.floor(distance.length * Math.random())]
