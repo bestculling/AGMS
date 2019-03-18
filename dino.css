@@ -3,7 +3,7 @@ cursor: url(image/cursor.cur), auto;
 }
 body{
     font-family: 'Press Start 2P', cursive;
-     background-image: url('ground.webp');
+     background-image: url('ground2.jpg');
     background-size:100%;
     background-repeat: repeat-y;
     background-attachment: fixed;
