@@ -19,14 +19,19 @@ canvas{
     bottom: 0;
     margin: auto;
     border-radius: 5px;
+	background: url(image/mapground.png);
+	animation: animatedBackground 5.3s linear infinite;
 }
 h1,h2,h3{
     text-align:center;
     text-transform:uppercase;
-
 }
 #top, #bottom{
     margin: 0;
     padding: 0;
     color: #EC7063;
+}
+@keyframes animatedBackground {
+    0% { background-position: 0 0; }
+    100% { background-position: -1200px 0; }
 }

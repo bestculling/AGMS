@@ -2,7 +2,7 @@
 let dino = new Image()
 let map = new Image()
 let rock = new Image()
-map.src = 'image/map.jpg'
+map.src = 'image/map.png'
 dino.src = 'image/dino_fix.png'
 rock.src = 'image/rock.png'
 //เริ่มเกมส์ จะเรียกฟังก์ชัน start()
@@ -34,7 +34,7 @@ let sound = (id)=>{
 let drawFram = (framX, framY, canvasX) => {
     ctx.drawImage(map, 0, 0)
     ctx.drawImage(dino, framX * width, framY * height, width, height, canvasX, canvasY, scaleWidth, scaleHeigth)
-    ctx.drawImage(rock, trap, 500,100,100)
+    ctx.drawImage(rock, trap, 520,100,100)
 }
 let jump = (event) => {
     let state = (event.type == 'keydown')?true:false
