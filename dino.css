@@ -21,15 +21,17 @@ canvas{
     border-radius: 5px;
 	background: url(image/mapground.png);
 	animation: animatedBackground 5.3s linear infinite;
+	z-index: -1;
 }
 h1,h2,h3{
     text-align:center;
     text-transform:uppercase;
 }
-#top, #bottom{
+#top{
     margin: 0;
-    padding: 0;
+    padding: 10px;
     color: #EC7063;
+	background: #495c6b;
 }
 @keyframes animatedBackground {
     0% { background-position: 0 0; }

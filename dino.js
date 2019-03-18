@@ -25,7 +25,6 @@ velocity = 0
 velocity_x = 0
 let trap = 500
 
-
 //ควบคุมเสียงเกมส์
 let sound = (id)=>{
     document.getElementById(id).play()
@@ -66,7 +65,9 @@ let sprite = () => {
 
     //เช็คเวลาชนกัน
     if(trap > 100 && trap < 200 && canvasY > 400){
-      location.reload(); //โหลดหน้าใหม่
+      score = -1;
+	  let distance = [500, 600, 700, 800, 900, 1000, 1200, 650]
+      trap = distance[Math.floor(distance.length * Math.random())]
     }
 
     if(trap < 0){
@@ -118,4 +119,13 @@ let start = () => window.requestAnimationFrame(sprite)
 window.addEventListener('keydown', jump)
 window.addEventListener('keyup', jump)
 
-
+var score = 0;
+function addScore() {
+    score += 1;
+    myScore.innerText = "SCORE: " + pad(score, 3);
+}
+function pad(n, length) {
+  var len = length - (''+n).length;
+  return (len > 0 ? new Array(++len).join('0') : '') + n
+}
+setInterval(addScore, 100);
