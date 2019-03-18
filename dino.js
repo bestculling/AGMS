@@ -3,7 +3,7 @@ let dino = new Image()
 let map = new Image()
 let rock = new Image()
 map.src = 'image/map.jpg'
-dino.src = 'image/dino_idle.png'
+dino.src = 'image/dino_fix.png'
 rock.src = 'image/rock.png'
 //เริ่มเกมส์ จะเรียกฟังก์ชัน start()
 map.onload = () => start()
@@ -17,16 +17,14 @@ const height = 40 //ความยาว dino
 const scaleWidth = scale * width
 const scaleHeigth = scale * height
 ground  = 480 //ตำเเหน่งพื้นที่ dino ยืน
-canvasY = 0 
+canvasY = 500 
 gravity = 20 //เเรงโน้วถ่วง
 jumping = true
 up = false
 velocity = 0
-let trap = []
-trap[0] = {
-    x : 100,
-    y : 0
-};
+velocity_x = 0
+let trap = 500
+
 
 //ควบคุมเสียงเกมส์
 let sound = (id)=>{
@@ -36,7 +34,7 @@ let sound = (id)=>{
 let drawFram = (framX, framY, canvasX) => {
     ctx.drawImage(map, 0, 0)
     ctx.drawImage(dino, framX * width, framY * height, width, height, canvasX, canvasY, scaleWidth, scaleHeigth)
-
+    ctx.drawImage(rock, trap, 500,100,100)
 }
 let jump = (event) => {
     let state = (event.type == 'keydown')?true:false
@@ -50,15 +48,26 @@ let frameCount = 0
 
 let sprite = () => {
 
-    if (up && jumping == false){
-        canvasY -= 250
+    if (up && jumping == false){   
+        canvasY -= 300
         sound('jump')
         jumping = true
     }
+    
 
+    velocity_x -= 1.5 //force
     velocity += 1.5// gravity
+
+    trap += velocity_x
     canvasY += velocity
-    velocity *= 0.9// friction
+
+    velocity *= 0.6// ถ่วงเวลา
+    velocity_x *= 0.6
+
+    if(trap < 0){
+      let distance = [500, 600, 700, 800, 900, 1000, 1200, 650]
+      trap = distance[Math.floor(distance.length * Math.random())]
+    }
 
   // เช็คว่า dino ตกพื้น
   if (canvasY > 480) {
@@ -71,7 +80,7 @@ let sprite = () => {
 
     frameCount++
     //ความเร็วของ Animation
-    if (frameCount < 4){
+    if (frameCount < 5){
         window.requestAnimationFrame(sprite)
         return
     }
@@ -85,14 +94,14 @@ let sprite = () => {
         framY คือ 0
         canvasx คือ 0
     */
-    drawFram(cycleLoop[currentLoopIndex], 0, 50)
+    drawFram(cycleLoop[currentLoopIndex], 0, 150)
     currentLoopIndex++
     if (currentLoopIndex >= cycleLoop.length){
         currentLoopIndex = 0
     }
     let audio_game = document.getElementById('bgm')
     let audio_jump = document.getElementById('jump')
-    audio_game.volume = 0 // ปรับระดับเสียงเกมส์
+    audio_game.volume = 0.5 // ปรับระดับเสียงเกมส์
     audio_jump.volume = 0.2 // ปรับเสียงกระโดด
     window.requestAnimationFrame(sprite)
 
